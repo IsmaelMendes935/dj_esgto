@@ -4,5 +4,16 @@
     "discord-music-player": "^8.3.2",
     "discord.js": "^13.6.0",
     "ffmpeg-static": "^4.4.1"
-  }
+  },
+  "name": "dj_esgto",
+  "description": "Discord Bot (first node project)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
