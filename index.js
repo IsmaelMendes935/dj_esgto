@@ -2,6 +2,8 @@ const fs = require('node:fs');
 const { Client, Intents, Collection } = require('discord.js');
 const { Player } = require('discord-music-player');
 const { token, prefix } = require('./config.json');
+const { execute } = require('./commands/play');
+const { clearScreenDown } = require('node:readline');
 
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES],
@@ -21,11 +23,22 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
     console.log('Bot ready');
-    console.log(client.commands.keys());
 });
 
 client.on('messageCreate', async message => {
-    client.commands.get('play').execute(message, client, prefix);
+    if(!message.content.startsWith(prefix)) return;
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const command = args.shift();
+    if(!client.commands.has(command)) {
+        await message.reply('Comando errado/inválido.');
+        return;
+    }
+    try {
+        await client.commands.get(command)
+            .execute(message, args, client);
+    } catch(e) {
+        console.error(e);
+    }
 });
 
 client.login(token);
