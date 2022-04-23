@@ -2,8 +2,6 @@ const fs = require('node:fs');
 const { Client, Intents, Collection } = require('discord.js');
 const { Player } = require('discord-music-player');
 const { token, prefix } = require('./config.json');
-const { execute } = require('./commands/play');
-const { clearScreenDown } = require('node:readline');
 
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES],
